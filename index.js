@@ -1,0 +1,37 @@
+
+const express = require('express');
+const app = express();
+
+// Home page
+app.get('/', (req, res) => {
+  res.send('Hello, IS117! Your web server is working.');
+});
+
+// About page
+app.get('/about', (req, res) => {
+  res.send('A web server receives a request and sends a response.');
+});
+
+// Page not found
+app.use((req, res) => {
+  res.status(404);
+  res.send('Page not found.');
+});
+
+
+if (require.main === module) {
+  const port = 3000;
+
+  app.listen(port, (error) => {
+    if (error) {
+      console.error(error.message);
+      process.exitCode = 1;
+      return;
+    }
+
+    console.log(`Server running at http://localhost:${port}`);
+    console.log('Press Ctrl+C to stop the server.');
+  });
+}
+
+module.exports = app;
